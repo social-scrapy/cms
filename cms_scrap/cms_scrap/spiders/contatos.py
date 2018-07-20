@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import scrapy
 
-from cms.items import Contato
+from cms_scrap.items import Contato
 
 class ContatosSpider(scrapy.Spider):
     name = 'contatos'

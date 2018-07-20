@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import scrapy
 
-from cms.items import Despesa
+from cms_scrap.items import Despesa
 from scrapy.http import Request
 
 class CmsSpider(scrapy.Spider):
