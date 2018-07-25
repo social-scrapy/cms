@@ -11,9 +11,9 @@ class CmsScrapPipeline(object):
     def process_item(self, item, spider):
         return item
 
-class CmsDespesasPipelineJsonWriter(object):
+class CmsScrapPipelineJsonWriter(object):
     def open_spider(self, spider):
-        self.file = open ('./cms_scrap/data/despesas.jl', 'w')
+        self.file = open ('items.jl', 'w')
 	
     def close_spider(self, spider):
         self.file.close()

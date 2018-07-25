@@ -1,8 +1,13 @@
 # -*- coding: utf-8 -*-
-import scrapy
-
+from scrapy.loader.processors import MapCompose, Join
+from scrapy.loader import ItemLoader
 from cms_scrap.items import Despesa
 from scrapy.http import Request
+from w3lib.html import remove_tags
+
+import datetime
+import socket
+import scrapy
 
 class CmsSpider(scrapy.Spider):
 
@@ -18,28 +23,28 @@ class CmsSpider(scrapy.Spider):
                 self.append(self.bad_log_file, response.url)
 
             elif response.status == 200:
-
-                divs_despesas = response.xpath('//*[@id="ContentPlaceHolder1_UpdatePanel1"]/div')
-                del divs_despesas[:2]
-                del divs_despesas[-1]
-
-                for divs in divs_despesas:
-                    despesa = Despesa()
-                    despesa['data'] = divs.xpath('./b[contains(text(),"Data")]/following-sibling::text()[1]').extract()
-                    despesa['tipo'] = divs.xpath('./b[contains(text(),"Tipo:")]/following-sibling::text()[1]').extract()
-                    despesa['responsavel'] = divs.xpath('./b[contains(text(),"Responsável:")]/following-sibling::text()[1]').extract()
-                    despesa['usuario'] = divs.xpath('./b[contains(text(),"Usuário:")]/following-sibling::text()[1]').extract()
-                    despesa['valor'] = divs.xpath('./b[contains(text(),"Valor:")]/following-sibling::text()[1]').extract()
-                    despesa['localidade'] = divs.xpath('./b[contains(text(),"Localidade:")]/following-sibling::text()[1]').extract()
-                    despesa['justificativa'] = divs.xpath('./b[contains(text(),"Justificativa:")]/following-sibling::text()[1]').extract()
-                    yield despesa
-
+                selectors = response.xpath('//*[@id="ContentPlaceHolder1_UpdatePanel1"]/div')
+                del selectors[:2]
+                del selectors[-1]
+                
+                for divs in selectors:
+                    #parse despesas
+                    l = ItemLoader (item=Despesa(), selector=divs)
+                    l.add_xpath('data', './b[contains(text(),"Data")]/following-sibling::text()[1]'.encode('utf-8'), MapCompose(str.strip))
+                    l.add_xpath('tipo', './b[contains(text(),"Tipo")]/following-sibling::text()[1]'.encode('utf-8'), MapCompose(str.strip))
+                    l.add_xpath('responsavel', u'./b[contains(text(),"Responsável")]/following-sibling::text()[1]', MapCompose(str.strip))
+                    l.add_xpath('usuario', './b[contains(text(),"Usuário")]/following-sibling::text()[1]', MapCompose(str.strip))
+                    l.add_xpath('valor', './b[contains(text(),"Valor")]/following-sibling::text()[1]'.encode('utf-8'), MapCompose(str.strip))
+                    l.add_xpath('localidade', './b[contains(text(),"Localidade")]/following-sibling::text()[1]'.encode('utf-8'), MapCompose(str.strip))
+                    l.add_xpath('justificativa', './b[contains(text(),"Justificativa")]/following-sibling::text()[1]'.encode('utf-8'), MapCompose(str.strip, remove_tags), Join())
+                    yield l.load_item()          
             else:
                 self.append(self.bad_log_file, response.url)
 
-        except Exception:
+        except Exception as e:
             self.log('[exception] : %s' % e)
         
+        #pagination post request
         yield scrapy.FormRequest.from_response(
             response,
             url="http://www.cms.ba.gov.br/despesa.aspx/",
@@ -49,3 +54,10 @@ class CmsSpider(scrapy.Spider):
             },
             callback = self.parse
         )
+
+      
+
+    
+    
+
+

@@ -17,11 +17,11 @@ class ContatosSpider(scrapy.Spider):
                 del trs [:1]
                 for tds in trs:
                     contato = Contato()
-                    contato['vereador'] = tds.xpath('./td[1]/text()').extract()
-                    contato['gabinete'] = tds.xpath('./td[2]/text()').extract()
-                    contato['telefone'] = tds.xpath('./td[3]/text()').extract()
-                    contato['email'] = tds.xpath('./td[4]/text()').extract()
-                    contato['partido'] = tds.xpath('./td[5]/text()').extract()
+                    contato['vereador'] = tds.xpath(u'./td[1]/text()').extract()
+                    contato['gabinete'] = tds.xpath(u'./td[2]/text()').extract()
+                    contato['telefone'] = tds.xpath(u'./td[3]/text()').extract()
+                    contato['email'] = tds.xpath(u'./td[4]/text()').extract()
+                    contato['partido'] = tds.xpath(u'./td[5]/text()').extract()
                     yield contato
                     
         except Exception:
