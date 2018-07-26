@@ -30,3 +30,11 @@ class Despesa(scrapy.Item):
     localidade = Field()
     justificativa = Field()
     pass
+
+class Vereador(scrapy.Item):
+    nome = Field()
+    partido = Field()
+    foto = Field()
+    image_urls = Field()
+    images = Field()
+    pass

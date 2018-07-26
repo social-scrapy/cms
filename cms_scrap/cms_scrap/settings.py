@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import scrapy
 
 # Scrapy settings for cms_scrap project
 #
@@ -21,6 +22,7 @@ NEWSPIDER_MODULE = 'cms_scrap.spiders'
 # Obey robots.txt rules
 ROBOTSTXT_OBEY = False
 FEED_EXPORT_ENCODING = 'utf-8'
+IMAGES_STORE = '../image'
 
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
 #CONCURRENT_REQUESTS = 32
@@ -65,9 +67,9 @@ DOWNLOAD_DELAY = 2
 
 # Configure item pipelines
 # See https://doc.scrapy.org/en/latest/topics/item-pipeline.html
-#ITEM_PIPELINES = {
-    #'cms_scrap.pipelines.CmsScrapPipelineJsonWriter': 100
-#}
+ITEM_PIPELINES = {
+    'scrapy.pipelines.images.ImagesPipeline': 1
+}
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://doc.scrapy.org/en/latest/topics/autothrottle.html
