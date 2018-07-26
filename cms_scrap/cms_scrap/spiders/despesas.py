@@ -3,7 +3,7 @@ from scrapy.loader.processors import MapCompose, Join
 from scrapy.loader import ItemLoader
 from cms_scrap.items import Despesa
 from scrapy.http import Request
-from w3lib.html import remove_tags
+from w3lib.html import remove_tags, replace_escape_chars, remove_comments
 
 import datetime
 import socket
@@ -40,7 +40,7 @@ class CmsSpider(scrapy.Spider):
                     l.add_xpath('usuario', './b[contains(text(),"Usuário")]/following-sibling::text()[1]', MapCompose(str.strip))
                     l.add_xpath('valor', './b[contains(text(),"Valor")]/following-sibling::text()[1]'.encode('utf-8'), MapCompose(str.strip))
                     l.add_xpath('localidade', './b[contains(text(),"Localidade")]/following-sibling::text()[1]'.encode('utf-8'), MapCompose(str.strip))
-                    l.add_xpath('justificativa', './b[contains(text(),"Justificativa")]/following-sibling::text()[1]'.encode('utf-8'), MapCompose(str.strip, remove_tags), Join())
+                    l.add_xpath('justificativa', './b[contains(text(),"Justificativa")]/following-sibling::text()[1]'.encode('utf-8'), MapCompose(str.strip, remove_tags, replace_escape_chars, remove_comments))
 
                     yield l.load_item()  
         
