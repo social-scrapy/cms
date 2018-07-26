@@ -19,16 +19,20 @@ class CmsSpider(scrapy.Spider):
     def parse(self, response):
 
         try:
+
             if response.status == 404:
+
                 self.append(self.bad_log_file, response.url)
 
             elif response.status == 200:
+
                 selectors = response.xpath('//*[@id="ContentPlaceHolder1_UpdatePanel1"]/div')
                 del selectors[:2]
                 del selectors[-1]
                 
                 for divs in selectors:
-                    #parse despesas
+
+                    #Parse despesas
                     l = ItemLoader (item=Despesa(), selector=divs)
                     l.add_xpath('data', './b[contains(text(),"Data")]/following-sibling::text()[1]'.encode('utf-8'), MapCompose(str.strip))
                     l.add_xpath('tipo', './b[contains(text(),"Tipo")]/following-sibling::text()[1]'.encode('utf-8'), MapCompose(str.strip))
@@ -37,14 +41,18 @@ class CmsSpider(scrapy.Spider):
                     l.add_xpath('valor', './b[contains(text(),"Valor")]/following-sibling::text()[1]'.encode('utf-8'), MapCompose(str.strip))
                     l.add_xpath('localidade', './b[contains(text(),"Localidade")]/following-sibling::text()[1]'.encode('utf-8'), MapCompose(str.strip))
                     l.add_xpath('justificativa', './b[contains(text(),"Justificativa")]/following-sibling::text()[1]'.encode('utf-8'), MapCompose(str.strip, remove_tags), Join())
-                    yield l.load_item()          
+
+                    yield l.load_item()  
+        
             else:
+
                 self.append(self.bad_log_file, response.url)
 
         except Exception as e:
+
             self.log('[exception] : %s' % e)
         
-        #pagination post request
+        #Post request pagination
         yield scrapy.FormRequest.from_response(
             response,
             url="http://www.cms.ba.gov.br/despesa.aspx/",
