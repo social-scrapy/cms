@@ -4,8 +4,6 @@ Este projeto tem como objetivo o compartilhamento de informações e o desenvolv
 
 ## Pré-Requisitos
 
-O projeto foi desenvolvido a partir da criação de um ambiente virtual Python:
-
 ### Instalação PIP
 
 ```
