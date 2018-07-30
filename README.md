@@ -1,6 +1,6 @@
 # Social Scrapy
 
-Este projeto tem como objetivo o compartilhamento de informações e o desenvolvimento de soluções voltadas à colet/análise de dados públicos disponibilizados pela Câmara Municipal de Salvador a partir da utilização do framework [Scrapy](https://scrapy.org/).
+Este projeto tem como objetivo o compartilhamento de informações e o desenvolvimento de soluções voltadas à coleta/análise de dados públicos disponibilizados pela Câmara Municipal de Salvador a partir da utilização do framework [Scrapy](https://scrapy.org/).
 
 ## Pré-Requisitos
 
