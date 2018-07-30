@@ -1,20 +1,17 @@
-# Project Title
+# Social Scrapy
 
-One Paragraph of project description goes here
+Este projeto tem como objetivo o compartilhamento de informações e o desenvolvimento de soluções voltadas à coleta e à análise de dados públicos disponibilizados pela Câmara Municipal de Salvador a partir da utilização do framework Scrapy (https://scrapy.org/).
 
-## Getting Started
+## Pré-Requisitos
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
-
-### Prerequisites
-
-What things you need to install the software and how to install them
+O projeto foi desenvolvido a partir da criação de um ambiente virtual Python:
 
 ```
-Give examples
+sudo apt install python3-pip
+sudo pip3 install virtualenv 
 ```
 
-### Installing
+### Instalação
 
 A step by step series of examples that tell you how to get a development env running
 
