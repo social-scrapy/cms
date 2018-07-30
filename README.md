@@ -1,6 +1,6 @@
 # Social Scrapy
 
-Este projeto tem como objetivo o compartilhamento de informações e o desenvolvimento de soluções voltadas à coleta e à análise de dados públicos disponibilizados pela Câmara Municipal de Salvador a partir da utilização do framework Scrapy (https://scrapy.org/).
+Este projeto tem como objetivo o compartilhamento de informações e o desenvolvimento de soluções voltadas à coleta e à análise de dados públicos disponibilizados pela Câmara Municipal de Salvador a partir da utilização do framework [Scrapy](https://scrapy.org/).
 
 ## Pré-Requisitos
 
@@ -27,22 +27,19 @@ virtualenv venv
 source venv/bin/activate
 ```
 
-## Deployment
+## Spiders Desenvolvidos
 
-Add additional notes about how to deploy this on a live system
+* Despesas - Coleta as informações da URL http://www.cms.ba.gov.br/despesa.aspx referentes às dispesas dos vereadores com viagens. Este Spider 
+trata da criação de requisições Posts (ASP.net) que visam a paginação da referida URL.
+* Contatos - Coleta as informações da URL http://www.cms.ba.gov.br/vereadores_contatos.aspx relacionadas aos contatos dos vereadores.
+* Vereadores - Coleta as informações da URL http://www.cms.ba.gov.br/vereadores.aspx, inclusive as imagens listadas na citada URL.
 
-## Built With
+### Execução Spiders
 
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
-* [Maven](https://maven.apache.org/) - Dependency Management
-* [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
+No diretório data, executar:
+```
+scrapy crawl <spider> -o <file>.<csv/json>
+```
 
-## Contributing
-
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
-
-## Versioning
-
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags). 
 
 
