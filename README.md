@@ -27,11 +27,9 @@ source venv/bin/activate
 
 ## Spiders Desenvolvidos
 
-* Despesas - Coleta as informações da URL http://www.cms.ba.gov.br/despesa.aspx referentes às dispesas dos vereadores com viagens. Este Spider 
-trata da criação de requisições Posts (ASP.net) que visam a paginação da referida URL.
-* Contatos - Coleta as informações da URL http://www.cms.ba.gov.br/vereadores_contatos.aspx relacionadas aos contatos dos vereadores.
-* Vereadores - Coleta as informações da URL http://www.cms.ba.gov.br/vereadores.aspx, inclusive as imagens listadas na citada URL. Ainda em relação a este Spider, vale ressaltar que foi utilizado o Pipeline 'scrapy.pipelines.images.ImagesPipeline' na raspagem das imagens que compôem a citada lista.
-
+* Despesas - http://www.cms.ba.gov.br/despesa.aspx - Raspagem dos dados referentes às dispesas dos vereadores com viagens. Vale destacar que este spider trata da criação de requisições Posts (ASP.net) que visam a paginação da referida página.
+* Contatos - http://www.cms.ba.gov.br/vereadores_contatos.aspx - Raspagem dos dados relacionadas aos contatos dos vereadores.
+* Vereadores - http://www.cms.ba.gov.br/vereadores.aspx - Raspagem dos dados de cada vereador, inclusive, as imagens dos mesmos. Para a extração das imagens foi utilizado o Pipeline 'scrapy.pipelines.images.ImagesPipeline'.
 ### Execução Spiders
 
 No diretório data, executar:
