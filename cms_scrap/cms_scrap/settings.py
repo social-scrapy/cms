@@ -22,7 +22,8 @@ NEWSPIDER_MODULE = 'cms_scrap.spiders'
 # Obey robots.txt rules
 ROBOTSTXT_OBEY = False
 FEED_EXPORT_ENCODING = 'utf-8'
-IMAGES_STORE = '../image'
+IMAGES_STORE = 'image'
+MEDIA_ALLOW_REDIRECTS = True
 
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
 #CONCURRENT_REQUESTS = 32

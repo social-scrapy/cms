@@ -34,7 +34,6 @@ class Despesa(scrapy.Item):
 class Vereador(scrapy.Item):
     nome = Field()
     partido = Field()
-    foto = Field()
     image_urls = Field()
     images = Field()
     pass

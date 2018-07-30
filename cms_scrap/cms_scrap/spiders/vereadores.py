@@ -2,9 +2,10 @@
 from scrapy.loader.processors import MapCompose, Join
 from scrapy.loader import ItemLoader
 from cms_scrap.items import Vereador
+from urllib.parse import urljoin
+from PIL import Image
 
 import scrapy
-import urlparse
 
 class VereadoresSpider(scrapy.Spider):
     
@@ -29,13 +30,15 @@ class VereadoresSpider(scrapy.Spider):
                     
                     #Parse vereadores
                     l = ItemLoader (item=Vereador(), selector=lis)
-                    image_urls = response.url
+                  
                     try:
-                        image_urls = urlparse.urljoin(response.url, lis.xpath('./div[@class="foto-vereador"]/a/img/@src'.encode('utf-8')).extract())
-                        l.add_xpath('image_urls', [x for x in image_urls])
+                       
+                        l.add_value('image_urls', urljoin("http://www.cms.ba.gov.br/", lis.xpath('./div[@class="foto-vereador"]/a/img/@src').extract_first()))
+
                     except IndexError:
-                        l.add_xpath('image_urls', image_urls)
-                    l.add_xpath('foto', './div[@class="foto-vereador"]/a/img/@src'.encode('utf-8'), MapCompose(str.strip))
+
+                        self.append(self.bad_log_file, response.url)
+			
                     l.add_xpath('nome', './div[@class="dados"]/span[@class="nome"]/text()'.encode('utf-8'), MapCompose(str.strip))
                     l.add_xpath('partido', './div[@class="dados"]/span[@class="partido"]/text()'.encode('utf-8'), MapCompose(str.strip))
                     yield l.load_item()  
