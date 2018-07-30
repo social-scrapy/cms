@@ -6,8 +6,14 @@ Este projeto tem como objetivo o compartilhamento de informações e o desenvolv
 
 O projeto foi desenvolvido a partir da criação de um ambiente virtual Python:
 
+### Instalação PIP
+
 ```
 sudo apt install python3-pip
+```
+
+### Instalação Virtualenv
+```
 sudo pip3 install virtualenv 
 ```
 
